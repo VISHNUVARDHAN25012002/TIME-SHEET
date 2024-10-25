@@ -44,9 +44,19 @@ public class Auth {
 
     // GET request for dashboard page
     @GetMapping("/dashboard")
-    public String showDashboard() {
-        return "dashboard"; // Render the dashboard template
+    public String showDashboard(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("userRole");
+
+        if ("admin".equals(role)) {
+            // load admin-specific data
+        } else if ("user".equals(role)) {
+            // load user-specific data
+        }
+
+        return "dashboard";
     }
+
 
     // POST request for registering a new user
     @PostMapping("/register")
